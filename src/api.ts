@@ -10,7 +10,7 @@ export class Api {
         this.socketSystem = socketSystem;
 
         router.get("getData/:id",(req, res) => {
-            res.send(socketSystem.ConnectedSockets);
+            res.send(socketSystem);
         });
     }
 }

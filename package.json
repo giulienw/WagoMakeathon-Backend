@@ -2,10 +2,10 @@
   "name": "wagomakeathon-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/main.js",
+  "main": "dist/app.js",
   "scripts": {
     "start": "tsc && node dist/app.js",
-    "dev": "nodemon src/entry.ts",
+    "dev": "nodemon src/app.ts",
     "lint": "eslint . --ext .ts"
   },
   "repository": {

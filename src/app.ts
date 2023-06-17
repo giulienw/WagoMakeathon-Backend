@@ -1,17 +1,12 @@
 import express from "express";
 import { createServer } from "http";
-import { Server } from "socket.io";
+import { SocketSystem } from "./socket";
+import { Api } from "./api";
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer, { /* options */ });
-
-io.on("connection", (socket) => {
-    console.log(`New connection: ${socket.id}`)
-    io.on("updateData", (data:any) => {
-        console.log(data);
-    });
-});
+const socketSystem = new SocketSystem(httpServer);
+const api = new Api(socketSystem);
 
 httpServer.listen(3000, () => {
     console.log("Server started")

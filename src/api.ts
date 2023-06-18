@@ -9,6 +9,21 @@ export class Api {
         this.socketSystem = socketSystem;
         this.router = Router();
 
+        this.router.use("/", (req, res, next) => {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header(
+              "Access-Control-Allow-Headers",
+              "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+            );
+
+            if (req.method == "OPTIONS") {
+                res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+                return res.status(200).json({});
+              }
+
+              next();
+        });
+
         this.router.post("/getPlants",async (req, res) => {
             var sockets = await socketSystem.ConnectedSockets();
             console.log(sockets);
@@ -20,6 +35,7 @@ export class Api {
                 return res.sendStatus(404);
 
             let id = req.query["id"]?.toString()
+            console.log(socketSystem.GetPlantData(id))
             res.send(socketSystem.GetPlantData(id));
         });
     }

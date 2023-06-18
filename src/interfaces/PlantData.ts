@@ -5,4 +5,5 @@ export interface PlantData {
     airPressure:number;
     humidity:number;
     airTemperature:number;
+    soilTemperature:number;
 }

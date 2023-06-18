@@ -15,7 +15,7 @@ export class SocketSystem {
             console.log(`New connection: ${socket.id}`)
             socket.on("updateData", (data:any) => {
                 console.log(`New Data From: ${socket.id}`);
-                data.timestamp = Date.now
+                //data.timestamp = Date.now
                 console.log(data);
                 this.plantsData.set(socket.id,data);
             });

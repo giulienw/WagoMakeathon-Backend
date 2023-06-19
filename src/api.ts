@@ -26,6 +26,7 @@ export class Api {
 
         this.router.post("/getPlants",async (req, res) => {
             var sockets = await socketSystem.ConnectedSockets();
+        
             console.log(sockets);
             res.json(sockets);
         });
@@ -35,8 +36,10 @@ export class Api {
                 return res.sendStatus(404);
 
             let id = req.query["id"]?.toString()
+            let plant = socketSystem.GetPlantData(id)
+
             console.log(socketSystem.GetPlantData(id))
-            res.send(socketSystem.GetPlantData(id));
+            res.send(plant);
         });
     }
 

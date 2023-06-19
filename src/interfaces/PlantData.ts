@@ -6,4 +6,5 @@ export interface PlantData {
     humidity:number;
     airTemperature:number;
     soilTemperature:number;
+    stream:string;
 }

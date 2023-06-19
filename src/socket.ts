@@ -13,9 +13,14 @@ export class SocketSystem {
 
         this.io.on("connection", (socket:Socket) => {
             console.log(`New connection: ${socket.id}`)
-            socket.on("updateData", (data:any) => {
+            socket.on("updateData", async (data:any) => {
                 console.log(`New Data From: ${socket.id}`);
                 //data.timestamp = Date.now
+                if(socket.id == (await this.io.fetchSockets())[0].id) {
+                    data.stream = "http://192.168.201.116:8000/stream.mjpg";
+                }else{
+                    data.stream = "";
+                }
                 console.log(data);
                 this.plantsData.set(socket.id,data);
             });
@@ -42,6 +47,8 @@ export class SocketSystem {
     }
 
     GetPlantData(plant:string){
-        return this.plantsData.get(plant);
+        let data = this.plantsData.get(plant);
+
+        return data;
     }
 };
